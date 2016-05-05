@@ -1,0 +1,2 @@
+Fabricator(:computer) do
+end

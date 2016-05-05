@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+100.times {
+  computer = Fabricate(:computer)
+
+  part = Fabricate(:part, computer: computer, part_type: 'cpu')
+  part = Fabricate(:part, computer: computer, part_type: 'mouse')
+  part = Fabricate(:part, computer: computer, part_type: 'keyboard')
+  part = Fabricate(:part, computer: computer, part_type: 'display')
+}

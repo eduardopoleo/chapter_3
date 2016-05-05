@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  info: MyString
+  part_type: MyString
+  price: MyString
+  computer_id: 1
+
+two:
+  info: MyString
+  part_type: MyString
+  price: MyString
+  computer_id: 1

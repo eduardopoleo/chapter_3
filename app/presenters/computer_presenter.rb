@@ -1,37 +1,20 @@
 class ComputerPresenter
   def initialize(computer)
     @computer = computer
+    @computer.methods.grep(/^get_(.*)_info$/) { ComputerPresenter.define_component $1 }
+    #find out exactly what grep and this regex do in ruby
   end
 
-  def cpu
-    info = @computer.get_cpu_info
-    price = @computer.get_cpu_price
-    result = "Cpu: #{info} ($#{price})"
-    return "*** You are way overbudget! #{result}" if price.to_i >= 50
-    result
-  end
-
-  def keyboard
-    info = @computer.get_keyboard_info
-    price = @computer.get_keyboard_price
-    result = "Keyboard: #{info} ($#{price})"
-    return "*** You are way overbudget! #{result}" if price.to_i >= 50
-    result
-  end
-
-  def mouse
-    info = @computer.get_mouse_info
-    price = @computer.get_mouse_price
-    result = "Mouse: #{info} ($#{price})"
-    return "*** You are way overbudget! #{result}" if price.to_i >= 50
-    result
-  end
-
-  def display
-    info = @computer.get_display_info
-    price = @computer.get_display_price
-    result = "Display: #{info} ($#{price})"
-    return "*** You are way overbudget! #{result}" if price.to_i >= 50
-    result
+  def self.define_component(name) #we have to make this method a singleton becuase we are defining instance methods
+    define_method(name) do
+      info = @computer.send "get_#{name}_info" #dynamic dispatch
+      price = @computer.send "get_#{name}_price"
+      result = "#{name.capitalize}: #{info} ($#{price})"
+      return "*** You are way overbudget! #{result}" if price.to_i >= 50
+      result
+    end
   end
 end
+#sending methods on the fly. Dynamic dispatch
+#defining methods on the fly
+#dinamically call define components to generate the methods call
